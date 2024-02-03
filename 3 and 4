@@ -1,0 +1,83 @@
+//task1
+#include <iostream>
+#include <cstdlib>
+
+//заполнение массива
+void fillArray(int** arr, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            arr[i][j] = rand() % 100 + 1; // случ число от 1 до 100
+        }
+    }
+}
+
+// функция для отображения массива
+void displayArray(int** arr, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            std::cout << arr[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+// вычисление суммы на главной диагонали
+int sumDiagonal(int** arr, int rows, int cols) {
+    int sum = 0;
+    for (int i = 0; i < std::min(rows, cols); i++) {
+        sum += arr[i][i];
+    }
+    return sum;
+}
+
+int main() {
+    int rows, cols;
+    std::cout << "Enter the number of rows: ";
+    std::cin >> rows;
+    std::cout << "Enter the number of cols: ";
+    std::cin >> cols;
+
+    // выделение памяти
+    int** array = new int* [rows];
+    for (int i = 0; i < rows; i++) {
+        array[i] = new int[cols];
+    }
+
+    fillArray(array, rows, cols);
+    std::cout << "Array of random numbers:" << std::endl;
+    displayArray(array, rows, cols);
+
+    std::cout << "Sum of elements on the main diagonal: " << sumDiagonal(array, rows, cols) << std::endl;
+
+    // освобождение памяти
+    for (int i = 0; i < rows; i++) {
+        delete[] array[i];
+    }
+    delete[] array;
+
+    return 0;
+}
+
+
+//task2
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Employee {
+	std::string name;
+	int id;
+	std::string position;
+};
+//добавление нового сотрудника
+void addEmployee(std::vector<Employee>& employees) {
+	Employee newEmployee;
+	std::cout << "Enter the name of new employee: ";
+	std::cin >> newEmployee.name;
+	std::cout << "Enter ID of the new employee: ";
+	std::cin >> newEmployee.id;
+	std::cout << "Enter  job title of the new employee: ";\
+	std::cin >> newEmployee.position;
+	employees.push_back(newEmployee);
+	std::cout << "Employee was added." << std::endl;
+}
